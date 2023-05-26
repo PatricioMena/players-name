@@ -1,6 +1,9 @@
 const express = require('express'); // Now my app has access to express
 const app = express();
+const cors = require('cors');
 const PORT = 8000;
+
+app.use(cors());
 
 const players = {
   'christian mcCaffrey': {
@@ -73,6 +76,7 @@ app.get('/api/:playerName', (request, response) => {
   // response.json(players);
 });
 
-app.listen(PORT, () =>
+// Heroku maybe doesn't want to use the PORT we assign so we use process.env.PORT
+app.listen(process.env.PORT || PORT, () =>
   console.log(`The server is running on port ${PORT}! You better go catch it! `)
 );
